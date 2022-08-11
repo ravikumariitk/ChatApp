@@ -1,0 +1,18 @@
+#main{
+    height: 50vh;
+    width: 100%;
+    border: 1px solid red;
+    overflow-y: scroll;
+}
+#messagesend{
+    /* border: 1px solid red;  */
+    line-height: 0.5em;
+    text-align: end;
+    margin: 10px;
+}
+#messagerecieve{
+    /* border: 1px solid red;   */
+    line-height: 0.5em;
+    text-align: left;
+    margin: 10px;
+}
