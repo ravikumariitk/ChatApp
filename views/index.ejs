@@ -42,19 +42,39 @@
         <input type="email" class="form-control" id="exampleFormControlInput1" required name="givenEmail" autofocus>
       </div>
       <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" required name="givenTitle" autofocus>
+      </div>
+      <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Message</label>
         <textarea class="form-control" name="givenMessage" id="exampleFormControlTextarea1" required rows="3"></textarea>
       </div>
      <button type="submit" class="btn btn-primary">Send</button>
      </form><br>
-     <h5>Your messages</h5>
+     <h5>Your messages</h5><br>
      <div class="container">
+      <% let i=0 %>
+      <div class="accordion" id="accordionExample">
       <% data.forEach(element => { %>
-        <%= element.Email %>
-        <%= element.Message %>
-     <% }) %>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target= "#id<%= i %>"" aria-expanded="true" aria-controls="collapseOne">
+           <b><%= element.Email %></b>
+              </button>
+            </h2>
+            <div id="id<%= i %>"" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <%= element.Message %>
+              </div>
+            </div>
+          </div>
+          <br>
+        <% i++ %>
+     <%  }) %>
+    </div>
      </div>
     </div>
+    
     <script>
       array.forEach(element => {
         

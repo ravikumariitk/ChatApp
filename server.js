@@ -3,9 +3,10 @@ let app=express()
 let md5=require('md5');
 let isauthenticate=0;
 const mongoose = require('mongoose');
-let USERID="";
-let temp=0;
-let temp2=0
+let userId=""
+let name=""
+let email=""
+var kitten;
 main().catch(err => console.log(err));
 
 async function main() {
@@ -21,9 +22,6 @@ const kittySchema = new mongoose.Schema({
   Password: String,
   Phone: String
 });
-let name="";
-let email=""
-
 const Kitten = mongoose.model('UserInfo', kittySchema);
 app.get('/',(req,res)=>{
     res.render('Main');
@@ -32,18 +30,6 @@ app.get('/index',(req,res)=>{
   if(isauthenticate==1)
   {
     
-    if(temp==1)
-    { 
-      temp=0;
-      delete mongoose.connection.models['email'];
-      // delete mongoose.modelSchemas.kittySchema
-    }
-    const kittySchema = new mongoose.Schema({
-      Email: String,
-      Message: String,
-    });
-  const kitten = mongoose.model(email, kittySchema);
-  temp=1;
   kitten.find({},(err,result)=>{
     res.render('index',{name:name, data:result})
   })
@@ -62,10 +48,16 @@ app.post('/login',(req,res)=>{
     console.log(result)
     if(!err)
     {
-      if(Object.keys(result).length)
+      if((Object.keys(result)).length)
       { 
         if(md5(req.body.givenPassword)==result[0].Password)
         {
+          userId=req.body.givenEmail;
+          const kittySchema = new mongoose.Schema({
+            Email: String,
+            Message: String,
+          });
+          kitten = mongoose.model(userId, kittySchema);
           isauthenticate=1;
           name=result[0].Name;
           email= result[0].Email
@@ -92,6 +84,12 @@ app.post('/register',(req,res)=>{
       res.render('userexists')
     }
   })
+  userId=req.body.givenEmail;
+  const kittySchema = new mongoose.Schema({
+    Email: String,
+    Message: String,
+  });
+  kitten = mongoose.model(userId, kittySchema);
   const data = new Kitten({ Email:req.body.givenEmail,Name: req.body.givenName,Phone: req.body.givenPhone,Password:md5 (req.body.givenPassword)});
   data.save()
   isauthenticate=1;
@@ -116,6 +114,7 @@ Kitten.find({Email: req.body.givenEmail,Phone:req.body.givenPhone},function(err,
 })
 app.post('/logout',(req,res)=>{
   isauthenticate=0;
+  delete mongoose.connection.models[userId];
   res.redirect('/')
 })
 app.post("/reset",(req,res)=>{
@@ -133,18 +132,15 @@ app.post('/send',(req,res)=>{
       res.send('Sorry!!! user is on on ChatApp.')
       }
       else{
-        if(temp2==1)
-        { temp2=0;
-          delete mongoose.connection.models['req.body.givenEmail'];
-        }
         const kittySchema = new mongoose.Schema({
           Email: String,
+          Title: String,
           Message: String,
         });
-        const newKitten = mongoose.model(req.body.givenEmail, kittySchema);
-        temp2=1;
-        let data = new newKitten({ Email: email, Message:req.body.givenMessage });
+        newkitten = mongoose.model(req.body.givenEmail, kittySchema);
+        let data = new newkitten({ Email:userId , Message:req.body.givenMessage, Title:req.body.givenTitle});
         data.save();
+        delete mongoose.connection.models[req.body.givenEmail];
         res.redirect('/index');
       }
 })
@@ -152,12 +148,6 @@ app.post('/send',(req,res)=>{
 else{
   res.redirect('/login')
 }
-})
-app.post('/login',(req,res)=>{
-  USERID=req.body.givenEmail
-  const userdata = new Kitten({ data: "" , id: req.body.givenEmail,name:req.body.givenName });
-  userdata.save()
-  res.redirect('/index')
 })
 app.listen(80,()=>{
     console.log("Running at Port 80")
