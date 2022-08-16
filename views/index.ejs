@@ -55,23 +55,12 @@
      <div class="container">
       <% let i=0 %>
       <div class="accordion" id="accordionExample">
-      <% data.forEach(element => { %>
-          <!-- <%= element %> -->
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target= "#id<%= i %>"" aria-expanded="true" aria-controls="collapseOne">
-         <span>  <b><%= element.Email %></b> </span>
-              </button>
-            </h2>
-            <div id="id<%= i %>"" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <!-- <%= element.Title %> -->
-                <%= element.Message %>
-              </div>
-            </div>
-          </div>
-          <br>
-        <% i++ %>
+      <% friends.forEach(element => { %>
+        <form action="/message" method="post">
+          <input type="text" style="display: none;" name="email" value = <%= element.Email %>>
+       <button class="btn primary" id="friends"><%= element.Email %><br> </button>
+        </form>
+        
      <%  }) %>
     </div>
      </div>
