@@ -1,18 +1,25 @@
 {
-  "dependencies": {
-    "ejs": "^3.1.8",
-    "express": "^4.18.1",
-    "md5": "^2.3.0",
-    "mongoose": "^6.5.2",
-    "nodemon": "^2.0.19"
-  },
-  "scripts": {
-    "start": "node server.js"
-  },
   "name": "chatapp",
   "version": "1.0.0",
+  "description": "",
   "main": "server.js",
-  "author": "Ravi kumar",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravikumariitk/ChatApp.git"
+  },
+  "author": "",
   "license": "ISC",
-  "description": ""
+  "bugs": {
+    "url": "https://github.com/ravikumariitk/ChatApp/issues"
+  },
+  "homepage": "https://github.com/ravikumariitk/ChatApp#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0"
+  }
 }

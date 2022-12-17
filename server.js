@@ -12,6 +12,7 @@ app.use('/static', express.static('static'))
 app.get('/', (req, res) => {
   res.render('Main')
 })
+const PORT =process.env.PORT||80
 app.get('/register', (req, res) => {
   res.render('Register')
 })
@@ -210,6 +211,6 @@ app.post('/message', (req, res) => {
   })
 
 })
-app.listen(80, () => {
+app.listen(PORT, () => {
   console.log("Running at Port 80")
 })
