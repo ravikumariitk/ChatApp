@@ -1,6 +1,5 @@
 let express = require('express')
 let app = express()
-let md5 = require('md5');
 let isauthenticate = 0;
 const mongoose = require('mongoose');
 let ejs = require('ejs')
