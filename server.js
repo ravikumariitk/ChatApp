@@ -207,7 +207,7 @@ app.post('/message', (req, res) => {
   const messageModel = messageConnection.model('messages', messageConnectionSchema);
   messageModel.find({ Email: req.body.email }, (err, result) => {
     res.render('messages', { Data: result, name: req.body.email })
-  })
+  }) 
 
 })
 app.listen(PORT, () => {
