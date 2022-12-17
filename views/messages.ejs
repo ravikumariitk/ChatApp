@@ -13,13 +13,15 @@
     <div id="chatArea" >
        <% Data.forEach(element=>{ %>
           <%  if(element.Type=="Send"){ %>
-                <span id="send">
-                     <%= element.Message %><hr>
-                </span>
+                <div id="send">
+                     <%= element.Message %>
+                </div>
+                <br><br>
            <% }else if(element.Type=="Recieved"){ %>
-                <span id="recieve">
-                    <%= element.Message %><hr>
-                </span>
+                <div id="recieve">
+                    <%= element.Message %>
+                </div>
+                <br><br>
           <%  } %>
      <%   }) %>
     </div><br>

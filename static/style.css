@@ -34,12 +34,16 @@
     margin: 5px;
     font-family: 'Times New Roman', Times, serif;
     font-size: larger;
-    display: flex;
+    display:inline;
+    margin-right:20px;
+    
 }
 #recieve{
     float: left;
     margin: 5px;
     font-family: 'Times New Roman', Times, serif;
    font-size: larger;
-   display: flex;
+   display: inline;
+   
+   margin-left:20px;
 }

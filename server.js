@@ -16,7 +16,7 @@ app.get('/register', (req, res) => {
   res.render('Register')
 })
 app.post('/register', (req, res) => {
-  let registerConnection = mongoose.createConnection("mongodb://localhost:27017/UserData")
+  let registerConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const regSchema = new mongoose.Schema({
     Name: String,
     Password: String,
@@ -48,7 +48,7 @@ app.get('/login', (req, res) => {
   res.render('login')
 })
 app.post('/login', (req, res) => {
-  let loginConnection = mongoose.createConnection("mongodb://localhost:27017/UserData")
+  let loginConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const loginSchema = new mongoose.Schema({
     Password: String,
     Email: String
@@ -73,7 +73,7 @@ app.post('/login', (req, res) => {
 })
 app.get('/index', (req, res) => {
   if (isauthenticate == 1) {
-    let userConnection = mongoose.createConnection("mongodb://localhost:27017/" + ((email).split("@"))[0])
+    let userConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
     const userSchema = new mongoose.Schema({
       Email: String,
     });
@@ -94,7 +94,7 @@ app.get('/forget', (req, res) => {
   res.render('forget')
 })
 app.post('/forget', (req, res) => {
-  let forgetConnection = mongoose.createConnection("mongodb://localhost:27017/UserData")
+  let forgetConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const forgetSchema = new mongoose.Schema({
     Phone: String,
     Email: String
@@ -110,7 +110,7 @@ app.post('/forget', (req, res) => {
   })
 })
 app.post('/reset', (req, res) => {
-  let resetConnection = mongoose.createConnection("mongodb://localhost:27017/UserData")
+  let resetConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const resetSchema = new mongoose.Schema({
     Password: String,
     Email: String
@@ -128,7 +128,7 @@ app.post('/reset', (req, res) => {
   })
 })
 app.post('/send', (req, res) => {
-  let checkConnection = mongoose.createConnection("mongodb://localhost:27017/UserData")
+  let checkConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const checkSchema = new mongoose.Schema({
     Email: String,
     Name: String,
@@ -141,7 +141,7 @@ app.post('/send', (req, res) => {
       res.send("Sorry!!! The person is not on ChatApp😢")
     }
     else {
-      let friendConnection = mongoose.createConnection("mongodb://localhost:27017/" + ((email).split("@"))[0])
+      let friendConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
       const friendSchema = new mongoose.Schema({
         Email: String,
       });
@@ -167,7 +167,7 @@ app.post('/send', (req, res) => {
         Type: "Send"
       })
       message.save()
-      let sendMessageConnection = mongoose.createConnection("mongodb://localhost:27017/" + ((req.body.givenEmail).split("@"))[0])
+      let sendMessageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((req.body.givenEmail).split("@"))[0])
       const sendMessageFriendSchema = new mongoose.Schema({
         Email: String,
       });
@@ -198,7 +198,7 @@ app.post('/send', (req, res) => {
 
 })
 app.post('/message', (req, res) => {
-  let messageConnection = mongoose.createConnection("mongodb://localhost:27017/" + ((email).split("@"))[0])
+  let messageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
   const messageConnectionSchema = new mongoose.Schema({
     Email: String,
     Message: String,
