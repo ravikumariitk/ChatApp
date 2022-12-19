@@ -29,6 +29,32 @@
     width: 100%;
     border: 1px solid red;
 }
+#rv{
+    height: 40vh; 
+    width:30vw ;
+     margin:auto;
+      margin-top: 20vh;
+}
+#a{
+    height: 40vh; 
+    width:30vw ;
+     margin:auto;
+      margin-top: 20vh;
+}
+@media only screen and (max-width: 800px) {
+    #a{
+        height: 40vh; 
+        width:80vw ;
+         margin:auto;
+          margin-top: 30vh;
+    }
+    #rv{
+        height: 40vh; 
+        width:80vw ;
+         margin:auto;
+          margin-top: 30vh;
+    }
+  }
 #send{
     float: right;
     margin: 5px;

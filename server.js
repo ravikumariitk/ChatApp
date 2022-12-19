@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 let ejs = require('ejs')
 app.use(express.urlencoded())
 app.set('view engine', "ejs")
-var name = ""
+var name = "";
 var email = "";
 app.use('/static', express.static('static'))
 app.get('/', (req, res) => {
