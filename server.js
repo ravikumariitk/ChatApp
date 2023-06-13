@@ -13,6 +13,9 @@ const PORT =process.env.PORT||80
 app.get('/register', (req, res) => {
   res.render('start')
 })
+app.get('/logout',(req,res)=>{
+  res.redirect('/');
+})
 app.post('/register', (req, res) => {
   let registerConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const regSchema = new mongoose.Schema({
@@ -172,6 +175,7 @@ app.post('/send', (req, res) => {
       const sendSchema = new mongoose.Schema({
         Email: String,
         Message: String,
+        Time:String,
         Type: String
       });
       const sendModel = friendConnection.model('Messages', sendSchema);
@@ -211,17 +215,19 @@ app.post('/send', (req, res) => {
   })
 })
 app.post('/message', (req, res) => {
+  console.log(req.body);
   let name=req.body.name;
-  let email=req.body.email;
-  let messageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email[0]).split("@"))[0])
+  let email=req.body.myEmail;
+  let messageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
   const messageConnectionSchema = new mongoose.Schema({
     Email: String,
     Message: String,
     Type: String
   });
   const messageModel = messageConnection.model('messages', messageConnectionSchema);
-  messageModel.find({ Email: req.body.email }, (err, result) => {
-    res.render('messages', { Data: result, name: email })
+  messageModel.find({ Email: req.body.senderEmail }, (err, result) => {
+    console.log(result);
+    res.render('messages', { Data: result, name:req.body.senderEmail  })
   }) 
 })
 app.listen(PORT, () => {

@@ -6,21 +6,21 @@
     <title>ChatApp</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="/static/main2.css">
   </head>
   <body>
     <div >
     </div>
-    <div class="container">
+    <div >
       <br>
-     <h3> Hi <%= name %> !</h3><br>
+     <h3> Hi <%= name %> !</h3><a href="/logout">Logout</a><br>
      <h5>Send new message</h5>
      <form action="/send" method="post",id="myForm">
       <div class="mb-3">
-        <input type="text" class="form-control" style="display: none;" id="NAME1"  name="name">
+        <input type="text" class="form-control" style="display: block;" id="NAME1"  name="name">
       </div>
       <div class="mb-3">
-        <input type="email" class="form-control" style="display: none;" id="EMAIL1"  name="email">
+        <input type="email" class="form-control" style="display: block;" id="EMAIL1"  name="email">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email</label>
@@ -43,12 +43,12 @@
       <% friends.forEach(element => { %>
         <form action="/message" method="post">
           <div class="mb-3">
-            <input type="text" class="form-control" style="display: none;" id="NAME2"  name="name">
+            <input type="text" value= <%= name %>  class="form-control" style="display: block;" class="NAME2"  name="myName">
           </div>
           <div class="mb-3">
-            <input type="email" class="form-control" style="display: none;" id="EMAIL2"  name="email">
+            <input type="email" value=<%= name %> class="form-control" style="display: block;" class="EMAIL2"  name="myEmail">
           </div>
-          <input type="text" style="display: none;" name="email" value = <%= element.Email %>>
+          <input type="text" style="display: none;" name="senderEmail" value = <%= element.Email %>>
        <button class="btn primary" id="friends"><%= element.Email %><br> </button>
         </form>
      <%  }) %>
@@ -59,13 +59,14 @@
     <script>
     let name1=document.getElementById('NAME1');
     let email1=document.getElementById('EMAIL1');
-    let name2=document.getElementById('NAME2');
-    let email2=document.getElementById('EMAIL2');
+    let name2=document.getElementsByClassName('NAME2');
+    let email2=document.getElementsByClassName('EMAIL2');
     name1.value=localStorage.getItem('name');
     email1.value=localStorage.getItem('email');
     name2.value=localStorage.getItem('name');
     email2.value=localStorage.getItem('email');
-    console.log(name1.value,email1,value);
+    const name=localStorage.getItem('name');
+    const email=localStorage.getItem('email');
     </script>
   </body>
 </html>

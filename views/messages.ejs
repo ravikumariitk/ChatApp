@@ -11,20 +11,20 @@
   <body>
   <div class="container"><br><br>
     <h1> 
-    <%= name[1] %> 
+    <%= name %> 
     </h1>
 
     <div  >
        <% Data.forEach(element=>{ %>
           <%  if(element.Type=="Send"){ %>
             <div   id="Send">
-            <b style="border: solid black 1px; color: blue;"> You </b>&nbsp; writes:
+            <b style="border: solid black 1px; color: blue;"> You </b>&nbsp; wrote: 
               <%= element.Message %>
               <br><br>
           </div>
            <% }else if(element.Type=="Recieved"){ %>
                 <div  id="Recieved">
-                  <b style="border: solid black 1px; color: darkgreen;">  <%= name[1] %> </b>&nbsp; writes:
+                  <b style="border: solid black 1px; color: darkgreen;">  <%= name %> </b>&nbsp; wrote:
                     <%= element.Message %>
                 </div>
                 <br><br>
