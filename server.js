@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 let ejs = require('ejs')
 app.use(express.urlencoded())
 app.set('view engine', "ejs")
-var name = "";
-var email = "";
 app.use('/static', express.static('static'))
 app.get('/', (req, res) => {
   res.render('Main')
@@ -23,8 +21,8 @@ app.post('/register', (req, res) => {
     Phone: String,
     Email: String
   });
-  name = req.body.givenName
-  email = req.body.givenEmail
+  let name = req.body.givenName
+  let email = req.body.givenEmail
   const regModel = registerConnection.model('Userdata', regSchema);
   regModel.find({ Email: req.body.givenEmail }, (err, result) => {
     if (Object.keys(result).length != 0) {
@@ -39,15 +37,17 @@ app.post('/register', (req, res) => {
       })
       isauthenticate = 1;
       data.save();
-      res.redirect('/index')
+      res.redirect(`/index?name=${name}&email=${email}`);
     }
-  })
-
+  }) 
 })
 app.get('/login', (req, res) => {
   res.render('login')
 })
 app.post('/login', (req, res) => {
+  let name = req.body.givenName;
+  let email = req.body.givenEmail;
+  console.log(req.body);
   let loginConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const loginSchema = new mongoose.Schema({
     Password: String,
@@ -58,9 +58,18 @@ app.post('/login', (req, res) => {
     if (Object.keys(result).length != 0) {
       if (req.body.givenPassword == result[0].Password) {
         isauthenticate = 1
-        name = result[0].Name
-        email = result[0].Email
-        res.redirect('/index')
+      if (isauthenticate == 1) {
+        let userConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
+        const userSchema = new mongoose.Schema({
+          Email: String,
+        });
+        const userModel = userConnection.model('Friends', userSchema);
+        userModel.find({}, (err, result) => {
+          res.render('index', { name: email, friends: result } )
+        })
+      }
+      else
+        res.redirect('/login')
       }
       else {
         res.render('in')
@@ -72,12 +81,13 @@ app.post('/login', (req, res) => {
   })
 })
 app.get('/index', (req, res) => {
+    let name=req.query.name;
+    let email=req.query.email;
   if (isauthenticate == 1) {
     let userConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
     const userSchema = new mongoose.Schema({
       Email: String,
     });
-
     const userModel = userConnection.model('Friends', userSchema);
     userModel.find({}, (err, result) => {
       res.render('index', { name: email, friends: result })
@@ -128,6 +138,9 @@ app.post('/reset', (req, res) => {
   })
 })
 app.post('/send', (req, res) => {
+  let name=req.body.name;
+  let email=req.body.email;
+  // console.log(req.body);
   let checkConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const checkSchema = new mongoose.Schema({
     Email: String,
@@ -192,13 +205,14 @@ app.post('/send', (req, res) => {
         Type: "Recieved"
       })
       recievemessage.save()
-      res.redirect('/index')
+      res.redirect(`/index?name=${name}&email=${email}`)
     }
   })
-
 })
 app.post('/message', (req, res) => {
-  let messageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
+  let name=req.body.name;
+  let email=req.body.email;
+  let messageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email[0]).split("@"))[0])
   const messageConnectionSchema = new mongoose.Schema({
     Email: String,
     Message: String,
@@ -206,9 +220,8 @@ app.post('/message', (req, res) => {
   });
   const messageModel = messageConnection.model('messages', messageConnectionSchema);
   messageModel.find({ Email: req.body.email }, (err, result) => {
-    res.render('messages', { Data: result, name: req.body.email })
+    res.render('messages', { Data: result, name: email })
   }) 
-
 })
 app.listen(PORT, () => {
   console.log("Running at Port 80")

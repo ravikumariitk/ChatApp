@@ -36,18 +36,24 @@
       <br>
      <h3> Hi <%= name %> !</h3><br>
      <h5>Send new message</h5>
-     <form action="/send" method="post">
+     <form action="/send" method="post",id="myForm">
+      <div class="mb-3">
+        <input type="text" class="form-control" id="NAME1"  name="name">
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" id="EMAIL1"  name="email">
+      </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" required name="givenEmail" autofocus>
+        <input type="email" class="form-control" id="Email" required name="givenEmail" autofocus>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" required name="givenTitle" autofocus>
+        <input type="text" class="form-control" id="title" required name="givenTitle" autofocus>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-        <textarea class="form-control" name="givenMessage" id="exampleFormControlTextarea1" required rows="3"></textarea>
+        <textarea class="form-control" name="givenMessage" id="message" required rows="3"></textarea>
       </div>
      <button type="submit" class="btn btn-primary">Send</button>
      </form><br>
@@ -57,6 +63,12 @@
       <div class="accordion" id="accordionExample">
       <% friends.forEach(element => { %>
         <form action="/message" method="post">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="NAME2"  name="name">
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="EMAIL2"  name="email">
+          </div>
           <input type="text" style="display: none;" name="email" value = <%= element.Email %>>
        <button class="btn primary" id="friends"><%= element.Email %><br> </button>
         </form>
@@ -66,5 +78,16 @@
      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script>
+    let name1=document.getElementById('NAME1');
+    let email1=document.getElementById('EMAIL1');
+    let name2=document.getElementById('NAME2');
+    let email2=document.getElementById('EMAIL2');
+    name1.value=localStorage.getItem('name');
+    email1.value=localStorage.getItem('email');
+    name2.value=localStorage.getItem('name');
+    email2.value=localStorage.getItem('email');
+    console.log(name1.value,email1,value);
+    </script>
   </body>
 </html>

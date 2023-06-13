@@ -11,13 +11,13 @@
     <form action="/register" method="post"  id="rv" >
         <h4>Register</h4><hr>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="givenName" required autofocus>
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="givenName" required autofocus>
           </div>
          
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" required name="givenEmail">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required name="givenEmail">
           </div>
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Phone</label>
@@ -27,8 +27,40 @@
             <label for="exampleFormControlInput1" class="form-label">Create password</label>
             <input type="password" class="form-control" id="exampleFormControlInput1" required name="givenPassword" >
           </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary" onsubmit="submitForm" >Register</button>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script>
+   // Retrieve the form and form inputs
+const form = document.getElementById('rv');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+
+// Function to handle the form submission
+function submitForm(event) {
+  event.preventDefault();
+
+  // Get the name and email values
+  const name = nameInput.value;
+  const email = emailInput.value;
+
+  // Store the values in localStorage
+  localStorage.setItem('name', name);
+  localStorage.setItem('email', email);
+
+  // Submit the form
+  form.submit();
+
+  // Reset the form inputs
+  nameInput.value = '';
+  emailInput.value = '';
+}
+
+// Attach the submitForm function to the form's submit event
+form.addEventListener('submit', submitForm);
+
+    </script>
   </body>
 </html>
+
+

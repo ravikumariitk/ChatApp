@@ -9,31 +9,27 @@
   </head>
   <body>
   <div class="container"><br><br>
-    <h4>Chat between You & <%= name %></h4>
-    <div id="chatArea" >
+    <h1> 
+    <%= name[1] %> 
+    </h1>
+
+    <div  >
        <% Data.forEach(element=>{ %>
           <%  if(element.Type=="Send"){ %>
-                <div id="Send">
-                     <%= element.Message %>
-                </div>
-                <br><br>
+            <div   id="Recieved">
+            <b>  <%= name[0] %> writes: </b>
+              <%= element.Message %>
+              <br><br>
+          </div>
            <% }else if(element.Type=="Recieved"){ %>
-                <div id="Recieved">
+                <div  id="Recieved">
+             <b> <%= name[1] %> writes:</b>
                     <%= element.Message %>
                 </div>
                 <br><br>
           <%  } %>
      <%   }) %>
     </div><br>
-    <form action="/send" method="post">
-        <input type="text" name="givenEmail" style="display: none;" value= <%= name %>>
-        <input type="text" name="givenTitle" style="display: none;" value="none">
-    <div class="mb-3">
-        <textarea class="form-control" id="exampleFormControlTextarea1" name="givenMessage" rows="1"></textarea>
-      </div>
-      <button type="submit" class="btn btn-success">Send</button>
-    </form><br>
-    <button  class="btn btn-success"><a href="/index" style="text-decoration:none ; color: white;">Back</a></button>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
