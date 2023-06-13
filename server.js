@@ -5,10 +5,9 @@ const mongoose = require('mongoose');
 let ejs = require('ejs')
 app.use(express.urlencoded())
 app.set('view engine', "ejs")
-app.set('views', __dirname);
 app.use('/static', express.static('static'))
 app.get('/', (req, res) => {
-  res.render('main')
+  res.render('Main')
 })
 const PORT =process.env.PORT||80
 app.get('/register', (req, res) => {
