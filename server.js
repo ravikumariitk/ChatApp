@@ -7,11 +7,11 @@ app.use(express.urlencoded())
 app.set('view engine', "ejs")
 app.use('/static', express.static('static'))
 app.get('/', (req, res) => {
-  res.render('Main')
+  res.render('main')
 })
 const PORT =process.env.PORT||80
 app.get('/register', (req, res) => {
-  res.render('Register')
+  res.render('start')
 })
 app.post('/register', (req, res) => {
   let registerConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
@@ -42,12 +42,12 @@ app.post('/register', (req, res) => {
   }) 
 })
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('start')
 })
 app.post('/login', (req, res) => {
   let name = req.body.givenName;
   let email = req.body.givenEmail;
-  console.log(req.body);
+  // console.log(req.body);
   let loginConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
   const loginSchema = new mongoose.Schema({
     Password: String,
@@ -109,8 +109,9 @@ app.post('/forget', (req, res) => {
     Phone: String,
     Email: String
   });
+  // console.log(req.body);
   const forgetModel = forgetConnection.model('Userdata', forgetSchema);
-  forgetModel.find({ Email: req.body.givenEmail, Phone: req.body.givenPhone }, (err, result) => {
+  forgetModel.find({ Email: req.body.email, Phone: req.body.phone }, (err, result) => {
     if (Object.keys(result).length == 0) {
       res.send("Check your info again.")
     }
@@ -125,19 +126,19 @@ app.post('/reset', (req, res) => {
     Password: String,
     Email: String
   });
+  // console.log(req.body);
   const resetModel = resetConnection.model('Userdata', resetSchema);
-  resetModel.updateOne({ Email: req.body.givenEmail }, { Password: req.body.givenPassword }, (err, update) => {
-    // console.log(update)
+  resetModel.updateOne({ Email: req.body.email }, { Password: req.body.givenPassword }, (err, update) => {
     if (err) {
       res.send("Some error occured!!!")
     }
     else {
       res.redirect('/login')
-
     }
   })
 })
 app.post('/send', (req, res) => {
+  console.log(req.body);
   let name=req.body.name;
   let email=req.body.email;
   // console.log(req.body);

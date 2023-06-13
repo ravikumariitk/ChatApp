@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    
+<div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="/register" method="post" id="rv">
+                <h1>Create Account</h1>
+                <input id="name" type="text" name="givenName" placeholder="Name" />
+                <input id="email" type="email" name="givenEmail" placeholder="Email" />
+                <input type="number" name="givenPhone" placeholder="Phone Number">
+                <input type="password" name="givenPassword" placeholder="Password" />
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="/login" method="post" id="a">
+                <h1>Sign in</h1>
+                <input type="text" name="givenName" id="name1" placeholder="Name" />
+                <input type="email" name="givenEmail" id="email1" placeholder="Email" />
+                <input type="password" name="givenPassword" placeholder="Password" />
+                <a href="/forget">Forgot your password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById('rv');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+
+        // Function to handle the form submission
+        function submitForm(event) {
+        event.preventDefault();
+        
+        // Get the name and email values
+        const name = nameInput.value;
+        const email = emailInput.value;
+
+        // Store the values in localStorage
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+
+        // Submit the form
+        form.submit();
+
+        // Reset the form inputs
+        nameInput.value = '';
+        emailInput.value = '';
+        }
+        form.addEventListener('submit', submitForm);
+
+
+        const form1 = document.getElementById('a');
+        const nameInput1 = document.getElementById('name1');
+        const emailInput1 = document.getElementById('email1');
+
+        // Function to handle the form submission
+        function submitForm1(event) {
+        event.preventDefault();
+        // Get the name and email values
+        const name = nameInput1.value;
+        const email = emailInput1.value;
+
+        // Store the values in localStorage
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+
+        // Submit the form
+        form1.submit();
+
+        // Reset the form inputs
+        nameInput1.value = '';
+        emailInput1.value = '';
+        }
+        form1.addEventListener('submit', submitForm1);
+
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () =>
+container.classList.add('right-panel-active')
+);
+
+signInButton.addEventListener('click', () =>
+container.classList.remove('right-panel-active'));
+    </script>
+</body>
+</html>

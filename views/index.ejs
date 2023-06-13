@@ -6,31 +6,10 @@
     <title>ChatApp</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
   </head>
   <body>
     <div >
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">ChatApp</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>&nbsp;
-            <form action="/logout" method="post">
-              <button class="btn btn-outline-primary" type="submit">logout</button>
-            </form>
-          </div>
-        </div>
-      </nav>
     </div>
     <div class="container">
       <br>
@@ -38,41 +17,40 @@
      <h5>Send new message</h5>
      <form action="/send" method="post",id="myForm">
       <div class="mb-3">
-        <input type="text" class="form-control" id="NAME1"  name="name">
+        <input type="text" class="form-control" style="display: none;" id="NAME1"  name="name">
       </div>
       <div class="mb-3">
-        <input type="email" class="form-control" id="EMAIL1"  name="email">
+        <input type="email" class="form-control" style="display: none;" id="EMAIL1"  name="email">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email</label>
         <input type="email" class="form-control" id="Email" required name="givenEmail" autofocus>
       </div>
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" required name="givenTitle" autofocus>
+        <input type="text" class="form-control" id="title"style="display: none;" name="givenTitle" autofocus>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Message</label>
         <textarea class="form-control" name="givenMessage" id="message" required rows="3"></textarea>
       </div>
      <button type="submit" class="btn btn-primary">Send</button>
-     </form><br>
-     <h5>Your messages</h5><br>
+     </form>
+     <br>
+     <h5>Your Conversation</h5><br>
      <div class="container">
       <% let i=0 %>
       <div class="accordion" id="accordionExample">
       <% friends.forEach(element => { %>
         <form action="/message" method="post">
           <div class="mb-3">
-            <input type="text" class="form-control" id="NAME2"  name="name">
+            <input type="text" class="form-control" style="display: none;" id="NAME2"  name="name">
           </div>
           <div class="mb-3">
-            <input type="email" class="form-control" id="EMAIL2"  name="email">
+            <input type="email" class="form-control" style="display: none;" id="EMAIL2"  name="email">
           </div>
           <input type="text" style="display: none;" name="email" value = <%= element.Email %>>
        <button class="btn primary" id="friends"><%= element.Email %><br> </button>
         </form>
-        
      <%  }) %>
     </div>
      </div>
