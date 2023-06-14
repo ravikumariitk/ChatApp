@@ -15,4 +15,4 @@ If you have forgotten your password then click on the forget password on the sig
 Here you have to type your registered email and phone no. and submit it after that a new window will appear which will ask you to type new password which looks like:-
 <img src="static/IMG/enter%20new%20password%20.png" alt=""><br>
 Here you can reset your password very nicely.<br>
-If you have forgotten your registered phone no. also then you have to mail at <a href="mailto:ravikumariitk21@gmail.com" target="_blank">This</a>.
+
