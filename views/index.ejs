@@ -17,10 +17,10 @@
      <h5>Send new message</h5>
      <form action="/send" method="post",id="myForm">
       <div class="mb-3">
-        <input type="text" class="form-control" style="display: block;" id="NAME1"  name="name">
+        <input type="text" class="form-control" style="display: none;" id="NAME1"  name="name">
       </div>
       <div class="mb-3">
-        <input type="email" class="form-control" style="display: block;" id="EMAIL1"  name="email">
+        <input type="email" class="form-control" style="display: none;" id="EMAIL1"  name="email">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email</label>
@@ -37,16 +37,16 @@
      </form>
      <br>
      <h5>Your Conversation</h5><br>
-     <div class="container">
+     <div class="container2">
       <% let i=0 %>
       <div class="accordion" id="accordionExample">
       <% friends.forEach(element => { %>
         <form action="/message" method="post">
           <div class="mb-3">
-            <input type="text" value= <%= name %>  class="form-control" style="display: block;" class="NAME2"  name="myName">
+            <input type="text" style="display: none;" value= <%= name %>  class="form-control"  class="NAME2"  name="myName">
           </div>
           <div class="mb-3">
-            <input type="email" value=<%= name %> class="form-control" style="display: block;" class="EMAIL2"  name="myEmail">
+            <input type="email" style="display: none;" value=<%= name %> class="form-control" style="display: none;" class="EMAIL2"  name="myEmail">
           </div>
           <input type="text" style="display: none;" name="senderEmail" value = <%= element.Email %>>
        <button class="btn primary" id="friends"><%= element.Email %><br> </button>

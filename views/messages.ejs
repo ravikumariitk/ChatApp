@@ -6,32 +6,43 @@
     <title><%= name %></title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="/static/main2.css">
   </head>
   <body>
   <div class="container"><br><br>
     <h1> 
     <%= name %> 
     </h1>
-
+<br><br>
     <div  >
        <% Data.forEach(element=>{ %>
           <%  if(element.Type=="Send"){ %>
             <div   id="Send">
-            <b style="border: solid black 1px; color: blue;"> You </b>&nbsp; wrote: 
+            <b style="border: solid black 1px; color: blue;"> You </b>&nbsp; <b>wrote at <%= element.Time %>: </b>
               <%= element.Message %>
-              <br><br>
+          
           </div>
            <% }else if(element.Type=="Recieved"){ %>
                 <div  id="Recieved">
-                  <b style="border: solid black 1px; color: darkgreen;">  <%= name %> </b>&nbsp; wrote:
+                  <b style="border: solid black 1px; color: darkgreen;">  <%= name %> </b>&nbsp;<b>wrote at <%= element.Time %>: </b>
                     <%= element.Message %>
                 </div>
-                <br><br>
+                
           <%  } %>
      <%   }) %>
     </div><br>
-  </div>
+  </div><br>
+    <form action="/send", method="post">
+      <div class="mb-3">
+        <input type="text" class="form-control" id="title" style="display: none;" name="givenEmail"  value= <%= name %>>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="title" style="display: none;" name="email"  value= <%= sender %>>
+      </div>
+      <label for="exampleFormControlTextarea1" class="form-label">Reply:</label>
+      <textarea class="form-control" name="givenMessage" id="message" required rows="3"></textarea>
+     <button type="submit" class="btn btn-primary">Send</button>
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
 </html>

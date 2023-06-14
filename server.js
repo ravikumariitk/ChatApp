@@ -1,5 +1,6 @@
 let express = require('express')
 let app = express()
+require('dotenv').config()
 let isauthenticate = 0;
 const mongoose = require('mongoose');
 let ejs = require('ejs')
@@ -9,6 +10,7 @@ app.use('/static', express.static('static'))
 app.get('/', (req, res) => {
   res.render('Main')
 })
+//databse on fake
 const PORT =process.env.PORT||80
 app.get('/register', (req, res) => {
   res.render('start')
@@ -16,8 +18,9 @@ app.get('/register', (req, res) => {
 app.get('/logout',(req,res)=>{
   res.redirect('/');
 })
+let url=process.env.MONGOURL
 app.post('/register', (req, res) => {
-  let registerConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
+  let registerConnection = mongoose.createConnection(url+"/UserData")
   const regSchema = new mongoose.Schema({
     Name: String,
     Password: String,
@@ -47,11 +50,12 @@ app.post('/register', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('start')
 })
+
 app.post('/login', (req, res) => {
   let name = req.body.givenName;
   let email = req.body.givenEmail;
   // console.log(req.body);
-  let loginConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
+  let loginConnection = mongoose.createConnection(url+"/UserData")
   const loginSchema = new mongoose.Schema({
     Password: String,
     Email: String
@@ -62,7 +66,7 @@ app.post('/login', (req, res) => {
       if (req.body.givenPassword == result[0].Password) {
         isauthenticate = 1
       if (isauthenticate == 1) {
-        let userConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
+        let userConnection = mongoose.createConnection(url+"/" + ((email).split("@"))[0])
         const userSchema = new mongoose.Schema({
           Email: String,
         });
@@ -87,7 +91,7 @@ app.get('/index', (req, res) => {
     let name=req.query.name;
     let email=req.query.email;
   if (isauthenticate == 1) {
-    let userConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
+    let userConnection = mongoose.createConnection(url+"/" + ((email).split("@"))[0])
     const userSchema = new mongoose.Schema({
       Email: String,
     });
@@ -107,7 +111,7 @@ app.get('/forget', (req, res) => {
   res.render('forget')
 })
 app.post('/forget', (req, res) => {
-  let forgetConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
+  let forgetConnection = mongoose.createConnection(url+"/UserData")
   const forgetSchema = new mongoose.Schema({
     Phone: String,
     Email: String
@@ -124,7 +128,7 @@ app.post('/forget', (req, res) => {
   })
 })
 app.post('/reset', (req, res) => {
-  let resetConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
+  let resetConnection = mongoose.createConnection(url+"/UserData")
   const resetSchema = new mongoose.Schema({
     Password: String,
     Email: String
@@ -141,11 +145,11 @@ app.post('/reset', (req, res) => {
   })
 })
 app.post('/send', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let name=req.body.name;
   let email=req.body.email;
   // console.log(req.body);
-  let checkConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/UserData")
+  let checkConnection = mongoose.createConnection(url+"/UserData")
   const checkSchema = new mongoose.Schema({
     Email: String,
     Name: String,
@@ -158,7 +162,7 @@ app.post('/send', (req, res) => {
       res.send("Sorry!!! The person is not on ChatApp😢")
     }
     else {
-      let friendConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
+      let friendConnection = mongoose.createConnection(url+"/" + ((email).split("@"))[0])
       const friendSchema = new mongoose.Schema({
         Email: String,
       });
@@ -167,11 +171,22 @@ app.post('/send', (req, res) => {
         if (Object.keys(frd).length == 0) {
           let data = new friendModel({
             Email: req.body.givenEmail,
-
           })
           data.save()
         }
       })
+      function getCurrentDateTime() {
+        const currentDate = new Date();
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        const date = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const year = String(currentDate.getFullYear());
+        
+        const dateTimeString = `${hours}:${minutes} (${date}/${month}/${year})`;
+        return dateTimeString;
+      }
+      const currentDateTime = getCurrentDateTime();
       const sendSchema = new mongoose.Schema({
         Email: String,
         Message: String,
@@ -182,10 +197,11 @@ app.post('/send', (req, res) => {
       let message = new sendModel({
         Email: req.body.givenEmail,
         Message: req.body.givenMessage,
+        Time:currentDateTime,
         Type: "Send"
       })
       message.save()
-      let sendMessageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((req.body.givenEmail).split("@"))[0])
+      let sendMessageConnection = mongoose.createConnection(url+"/" + ((req.body.givenEmail).split("@"))[0])
       const sendMessageFriendSchema = new mongoose.Schema({
         Email: String,
       });
@@ -201,33 +217,64 @@ app.post('/send', (req, res) => {
       const sendfrdSchema = new mongoose.Schema({
         Email: String,
         Message: String,
+        Time:String,
         Type: String
       });
       const sendfrdModel = sendMessageConnection.model('Messages', sendfrdSchema);
       let recievemessage = new sendfrdModel({
         Email: email,
         Message: req.body.givenMessage,
+        Time:currentDateTime,
         Type: "Recieved"
       })
       recievemessage.save()
-      res.redirect(`/index?name=${name}&email=${email}`)
+      // res.redirect(`/index?name=${name}&email=${email}`)
+      let messageConnection = mongoose.createConnection(url+"/" + ((req.body.email).split("@"))[0])
+      const messageConnectionSchema = new mongoose.Schema({
+        Email: String,
+        Message: String,
+        Time:String,
+        Type: String
+      });
+      const messageModel = messageConnection.model('messages', messageConnectionSchema);
+      messageModel.find({ Email: req.body.givenEmail }, (err, result) => {
+        // console.log(result);
+        res.redirect(`/messages?email=${req.body.email}&sender=${req.body.givenEmail}`)
+      }) 
     }
   })
 })
-app.post('/message', (req, res) => {
-  console.log(req.body);
-  let name=req.body.name;
-  let email=req.body.myEmail;
-  let messageConnection = mongoose.createConnection("mongodb+srv://Ravi:Ravi%40123@cluster0.bhushun.mongodb.net/" + ((email).split("@"))[0])
+app.get('/messages',(req,res)=>{
+  let email=req.query.email|| req.body.myEmail;
+  let sender=req.query.sender||req.body.senderEmail;
+  let messageConnection = mongoose.createConnection(url+"/" + ((email).split("@"))[0])
   const messageConnectionSchema = new mongoose.Schema({
     Email: String,
     Message: String,
+    Time:String,
     Type: String
   });
   const messageModel = messageConnection.model('messages', messageConnectionSchema);
-  messageModel.find({ Email: req.body.senderEmail }, (err, result) => {
-    console.log(result);
-    res.render('messages', { Data: result, name:req.body.senderEmail  })
+  messageModel.find({ Email: sender }, (err, result) => {
+    // console.log(result);
+    res.render('messages', { Data: result, name:sender,sender:email })
+  }) 
+})
+app.post('/message', (req, res) => {
+  // console.log(req.body);
+  let email=req.query.email|| req.body.myEmail;
+  let sender=req.query.sender||req.body.senderEmail;
+  let messageConnection = mongoose.createConnection(url+"/" + ((email).split("@"))[0])
+  const messageConnectionSchema = new mongoose.Schema({
+    Email: String,
+    Message: String,
+    Time:String,
+    Type: String
+  });
+  const messageModel = messageConnection.model('messages', messageConnectionSchema);
+  messageModel.find({ Email: sender }, (err, result) => {
+    // console.log(result);
+    res.render('messages', { Data: result, name:sender,sender:email })
   }) 
 })
 app.listen(PORT, () => {
