@@ -1,55 +1,62 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Password reset</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Forget Password</title>
   </head>
   <body>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <div class="form-gap" style="padding-top: 70px;"></div>
+  <div class="content">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <div class="text-center">
-                      <h3><i class="fa fa-lock fa-4x"></i></h3>
-                      <h2 class="text-center">Forgot Password?</h2>
-                      <p>You can reset your password here.</p>
-                      <div class="panel-body">
-        
-                        <form  action="/forget" method="post" >
-        
-                          <div class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                              <input id="email" name="email" placeholder="email address" name="givenEmail" class="form-control"  type="email">
-                            </div>
-                            <br>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-phone color-blue"></i></span>
-                              <input id="email" name="phone" placeholder="Phone no." name="givenphone" class="form-control"  type="number">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">
-                          </div>
-                          <input type="hidden" class="hide" name="token" id="token" value=""> 
-                        </form>
-        
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        <div class="col-md-6 order-md-2">
+          <img src="/static/images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="mb-4">
+              <h3>Forget Password</strong></h3>
+            </div>
+            <form action="/forget" method="post">
+              <div class="form-group last mb-4">
+                <label for="password">Username</label>
+                <input type="text" class="form-control" id="password" name="username">
               </div>
+              <div class="form-group last mb-4">
+                <label for="password">Phone No.</label>
+                <input type="text" class="form-control" id="password" name="phone">
+              </div>
+              
+              <div class="form-group last mb-4">
+                <label for="password">Email</label>
+                <input type="text" class="form-control" id="password" name="email">
+              </div>
+              <input type="submit" value="Send OTP" class="btn text-white btn-block btn-primary">
+            </form>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script>
+  </div>
 
-    </script>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/main.js"></script>
   </body>
 </html>

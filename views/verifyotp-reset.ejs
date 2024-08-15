@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Verify OTP</title>
+  </head>
+  <body>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 order-md-2">
+          <img src="/static/images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="mb-4">
+              <h3>Verify the OTP</h3>
+              <p class="mb-4">Enter the OTP recieved to your phone number.</p>
+            </div>
+            <form action="/verify-otp-reset" method="post">
+              <div class="form-group first">
+                  <label for="otp">Enter OTP</label>
+                  <input type="text" class="form-control" id="otp" name="otp">
+              </div>
+              <div style="display: none;" >
+                <div class="form-group first">
+                    <label for="phone">Phone No.</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value= "<%= phone %>">
+                </div>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" value= "<%= username %>">
+                <input type="text" class="form-control" id="email" name="email" value="<%= email %>">
+            </div>
+              <input type="submit" value="Submit" class="btn text-white btn-block btn-primary">
+          </form>
+          
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+   
+
+   
+</script>
+
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
