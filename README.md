@@ -1,4 +1,4 @@
-#ChatAPP
+# ChatAPP
 <p>This is web chat application using this app one can chat to one ore more person at one time. This app is live <b> <a href="https://chatapp12.onrender.com/" target="_blank">Here</a></b> 
 <p>The main page of this website looks like:-<br>
 <img src="static/IMG/mainpage.png" alt=""><br>
@@ -15,4 +15,8 @@ If you have forgotten your password then click on the forget password on the sig
 Here you have to type your registered email and phone no. and submit it after that a new window will appear which will ask you to type new password which looks like:-
 <img src="static/IMG/enter%20new%20password%20.png" alt=""><br>
 Here you can reset your password very nicely.<br>
+<<<<<<<<< Temporary merge branch 1
 If you have forgotten your registered phone no. also then you have to mail at <a href="mailto:ravikumariitk21@gmail.com" target="_blank">This</a>.
+=========
+If you have forgotten your registered phone no. also then you have to mail at <a href="mailto:ravikumariitk21@gmail.com" target="_blank">This</a>.
+>>>>>>>>> Temporary merge branch 2
